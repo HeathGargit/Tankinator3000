@@ -12,6 +12,9 @@ using System.Collections;
 
 public class TankHealth : MonoBehaviour {
 
+    //holds the spawn points object
+    public GameObject m_EnemyTankSpawnPoints;
+
     // The amount of health each tank starts with
     public float m_Starting_Health = 100f;
 
@@ -77,7 +80,16 @@ public class TankHealth : MonoBehaviour {
 
         //turn the tank off
         gameObject.SetActive(false);
-        gameObject.transform.position = GameObject.FindGameObjectWithTag("EnemyGarage").transform.position;
 
+        //set the spwn point of the tank so when a new game starts, it is in a random position.
+        gameObject.transform.position = RandomSpawnLocation();
+
+    }
+
+    private Vector3 RandomSpawnLocation()
+    {
+        //search the gameobject containing the spawn points and select a random 1. returns the position of that gameobject.
+        GameObject randomSpawn = m_EnemyTankSpawnPoints.transform.GetChild(Random.Range(0, m_EnemyTankSpawnPoints.transform.childCount)).gameObject;
+        return randomSpawn.transform.position;
     }
 }

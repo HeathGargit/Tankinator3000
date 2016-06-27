@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour {
         }
 
         m_TimerText.gameObject.SetActive(false);
-        m_MessageText.text = "Press Enter When Ready!";
+        m_MessageText.text = "Click When Ready!";
 
         m_HighScorePanel.gameObject.SetActive(false);
         m_NewGameButton.gameObject.SetActive(false);
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour {
         {
             //before the first game starts. once enter is pushed, the game starts
             case GameState.Start:
-                if (Input.GetKeyUp(KeyCode.Return) == true)
+                if (Input.GetKeyUp(KeyCode.Mouse0) == true)
                 {
                     //changing the state of things because the game has started.
                     m_TimerText.gameObject.SetActive(true);
@@ -238,9 +238,6 @@ public class GameManager : MonoBehaviour {
             int seconds = m_HighScores.scores[i];
             text += string.Format("{0:D2}:{1:D2}\n", (seconds / 60), (seconds % 60));
         }
-
-        //I added this because it was hard to tell how to restart the game form here.
-        text += "Press enter to restart!";
 
         //add all this text to the UI element
         m_HighScoresText.text = text;
